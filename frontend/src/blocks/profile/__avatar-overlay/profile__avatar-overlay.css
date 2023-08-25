@@ -1,0 +1,15 @@
+.profile__avatar-overlay {
+    margin: 0;
+    padding: 0;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: url(../../../images/pen.svg);
+    background-size: 26px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+

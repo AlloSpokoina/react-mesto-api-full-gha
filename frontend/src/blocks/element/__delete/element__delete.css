@@ -1,0 +1,14 @@
+.element__delete {
+  background-image: url(../../../images/deleteCard.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  width: 19px;
+  height: 19px;
+  border: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
