@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.42.175
+IP 158.160.42.175
 
 Frontend https://mestocohort66.nomoredomainsicu.ru
 
