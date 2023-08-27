@@ -11,6 +11,16 @@ class Api {
     return fetch(endpoint, options).then(this._checkResponse);
   }
 
+  changeLikeCardStatus(cardId, isLiked, token) {
+    const method = isLiked ? 'PUT' : 'DELETE';
+    return this._request(`${this._url}/cards/likes/${cardId}`, {
+      method,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+  }
+
   getInfo(token) {
     return this._request(`${this._url}/users/me`, {
       headers: {
@@ -68,31 +78,15 @@ class Api {
     });
   }
 
-  addLike(cardId, token) {
+  addLike(cardId) {
     return this._request(`${this._url}/cards/${cardId}/like`, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
+      method: 'PUT'
     });
   }
 
-  deleteLike(cardId, token) {
+  deleteLike(cardId) {
     return this._request(`${this._url}/cards/${cardId}/like`, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
-    });
-  }
-
-  changeLikeCardStatus(cardId, isLiked, token) {
-    const method = isLiked ? 'PUT' : 'DELETE';
-    return this._request(`${this._url}/cards/likes/${cardId}`, {
-      method,
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
+      method: 'DELETE'
     });
   }
 

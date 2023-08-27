@@ -106,9 +106,9 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser);
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
     api
-      .changeLikeCardStatus(card._id, localStorage.jwt, !isLiked)
+      .changeLikeCardStatus(card._id, !isLiked, localStorage.jwt)
       .then((newCard) => {
         setCards((state) =>
           state.map((c) => (c._id === card._id ? newCard : c))
@@ -165,7 +165,7 @@ function App() {
     if (localStorage.jwt) {
       getUserData(localStorage.jwt)
       .then(res => {
-        setUserEmail(res.data.email)
+        setUserEmail(res.email)
         setLoggedIn(true)
           navigate('/')
         })
