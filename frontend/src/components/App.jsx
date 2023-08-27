@@ -206,6 +206,7 @@ function App() {
   }
 
   function handleLogin(email, password) {
+    setIsLoading(true)
     login(email, password)
       .then((res) => {
         localStorage.setItem('jwt', res.token)
@@ -217,6 +218,7 @@ function App() {
         setIsSuccessful(false)
         console.error(`Ошибка авторизации ${err}`)
       })
+      .finally(() => setIsLoading(false))
   }
 
   function handleSignOut() {
