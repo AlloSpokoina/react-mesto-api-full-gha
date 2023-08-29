@@ -7,13 +7,14 @@ class Api {
   _checkResponse(res) { return res.ok ? res.json() : Promise.reject(new Error(`Ошибка: ${res.status}`)); }
 
 
-  _request(endpoint, options) {
-    return fetch(endpoint, options).then(this._checkResponse);
+  _request(url, options) {
+    return fetch(`${this._url}${url}`, options)
+      .then(this._checkResponse)
   }
 
   changeLikeCardStatus(cardId, isLiked, token) {
     const method = isLiked ? 'PUT' : 'DELETE';
-    return this._request(`${this._url}/cards/likes/${cardId}`, {
+    return this._request(`/cards/likes/${cardId}`, {
       method,
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -22,7 +23,7 @@ class Api {
   }
 
   getInfo(token) {
-    return this._request(`${this._url}/users/me`, {
+    return this._request(`/users/me`, {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
@@ -30,7 +31,7 @@ class Api {
   }
 
   getCards(token) {
-    return this._request(`${this._url}/cards`, {
+    return this._request(`/cards`, {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
@@ -38,7 +39,7 @@ class Api {
   }
 
   setUserInfo(data, token) {
-    return this._request(`${this._url}/users/me`, {
+    return this._request(`/users/me`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -52,7 +53,7 @@ class Api {
   }
 
   setAddNewAvatar(data, token) {
-    return this._request(`${this._url}/users/me/avatar`, {
+    return this._request(`/users/me/avatar`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -65,7 +66,7 @@ class Api {
   }
 
   addCard(data, token) {
-    return this._request(`${this._url}/cards`, {
+    return this._request(`/cards`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -78,20 +79,26 @@ class Api {
     });
   }
 
-  addLike(cardId) {
-    return this._request(`${this._url}/cards/${cardId}/like`, {
-      method: 'PUT'
+  addLike(cardId, token) {
+    return this._request(`/cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: {
+        "Authorization" : `Bearer ${token}`
+      }
     });
   }
 
-  deleteLike(cardId) {
-    return this._request(`${this._url}/cards/${cardId}/like`, {
-      method: 'DELETE'
+  deleteLike(cardId, token) {
+    return this._request(`/cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: {
+        "Authorization" : `Bearer ${token}`
+      }
     });
   }
 
   deleteCard(cardId, token) {
-    return this._request(`${this._url}/cards/${cardId}`, {
+    return this._request(`/cards/${cardId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,

@@ -1,7 +1,12 @@
-export const BASE_URL = 'https://api.mestocohort66.nomoredomainsicu.ru'
+export const baseUrl = 'https://api.mestocohort66.nomoredomainsicu.ru'
+
+function handleResponse(res) {
+  return res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`)
+}
+
 
 export function register(email, password) {
-  return fetch(`${BASE_URL}/signup`, {
+  return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json',
@@ -15,7 +20,7 @@ export function register(email, password) {
 }
 
 export function login(email, password) {
-  return fetch(`${BASE_URL}/signin`, {
+  return fetch(`${baseUrl}/signin`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -29,7 +34,7 @@ export function login(email, password) {
 }
 
 export function getUserData(token) {
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${baseUrl}/users/me`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +43,3 @@ export function getUserData(token) {
   })
     .then(res => handleResponse(res))
 };
-
-function handleResponse(res) {
-  return res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`)
-}
