@@ -80,20 +80,20 @@ class Api {
   }
 
   addLike(cardId, token) {
-    return this._request(`/cards/likes/${cardId}`, {
+    return this._request(`/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: {
-        'Authorization': `Bearer ${token}`,
-      },
+        "Authorization" : `Bearer ${token}`
+      }
     });
   }
 
   deleteLike(cardId, token) {
-    return this._request(`/cards/likes/${cardId}`, {
+    return this._request(`/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: {
-        'Authorization': `Bearer ${token}`,
-      },
+        "Authorization" : `Bearer ${token}`
+      }
     });
   }
 

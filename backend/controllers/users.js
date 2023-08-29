@@ -6,6 +6,7 @@ const User = require('../models/user');
 const BadRequestError = require('../error/BadRequestError');
 const NotFoundError = require('../error/NotFoundError');
 const ConflictError = require('../error/ConflictError');
+const UnautorizedError = require('../error/UnautorizedError');
 
 const { SECRET_KEY = 'mestogha' } = process.env;
 
@@ -91,7 +92,13 @@ module.exports.login = (req, res, next) => {
       const token = jwt.sign({ _id: user._id }, SECRET_KEY, { expiresIn: '7d' });
       res.send({ token });
     })
-    .catch(next);
+    .catch((error) => {
+      if (error.name === 'AuthorizationError') {
+        throw new UnautorizedError(error.message);
+      } else {
+        next(error);
+      }
+    });
 };
 
 module.exports.getMeUser = (req, res, next) => {

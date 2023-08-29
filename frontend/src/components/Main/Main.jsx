@@ -35,8 +35,8 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardCl
         />
       </section>
       <section className="element" aria-label="Photo card">
-        {loading ? <Spinner /> : cards.map(data => {
-          return <Card key={data._id} card={data} onCardLike={onCardLike} onCardClick={onCardClick} onDelete={onDelete} />
+        {loading ? <Spinner /> : cards.map(card => {
+          return <Card key={card._id} card={card} onCardLike={onCardLike} onCardClick={onCardClick} onDelete={onDelete} />
         })}
       </section>
     </main>
