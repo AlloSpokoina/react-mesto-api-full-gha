@@ -105,19 +105,6 @@ function App() {
       .finally(() => setIsLoading(false))
   }
 
-  // function handleCardLike(card) {
-  //   const isLiked = card.likes.some(i => i === currentUser._id);
-  //   api
-  //     .changeLikeCardStatus(card._id, !isLiked, localStorage.jwt)
-  //     .then((res) => {
-  //       console.log(cards);
-  //       setCards((cards) =>
-  //         cards.map((c) => (c._id === card._id ? res : c))
-  //       );
-  //     })
-  //     .catch((error) => console.error(`Ошибка ${error}`));
-  // }
-
   const handleCardLike = useCallback((card) => {
     const isLike = card.likes.some(element => currentUser._id === element)
     if (isLike) {
