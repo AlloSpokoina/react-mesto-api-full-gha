@@ -106,7 +106,8 @@ function App() {
   }
 
   const handleCardLike = useCallback((card) => {
-    const isLike = card.likes.some(element => currentUser._id === element)
+    console.log(card);
+    const isLike = card.likes.some((i) => i === currentUser._id)
     if (isLike) {
       api.deleteLike(card._id, localStorage.jwt)
         .then(res => {
@@ -135,9 +136,10 @@ function App() {
       .finally(() => setIsLoading(false))
   }
 
-  function handleSubmitPlace(dataCard, reset) {
+  function handleSubmitPlace(dataCards, reset) {
+    console.log(cards);
     setIsLoading(true)
-    api.addCard(dataCard, localStorage.jwt)
+    api.addCard(dataCards, localStorage.jwt)
       .then((res) => {
         setCards([res, ...cards])
         closeAllPopups()

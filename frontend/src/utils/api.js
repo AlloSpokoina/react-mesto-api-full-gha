@@ -1,6 +1,6 @@
 class Api {
   constructor(options) {
-    this._url = options.baseUrl;
+    this._baseUrl = options.baseUrl;
   }
 
 
@@ -8,13 +8,13 @@ class Api {
 
 
   _request(url, options) {
-    return fetch(`${this._url}${url}`, options)
+    return fetch(`${this._baseUrl}${url}`, options)
       .then(this._checkResponse)
   }
 
-  changeLikeCardStatus(cardId, isLiked, token) {
-    const method = isLiked ? 'PUT' : 'DELETE';
-    return this._request(`/cards/likes/${cardId}`, {
+  changeLikeCardStatus(cardId, isLike, token) {
+    const method = isLike ? 'PUT' : 'DELETE';
+    return this._request(`/cards/${cardId}/likes`, {
       method,
       headers: {
         'Authorization': `Bearer ${token}`,
